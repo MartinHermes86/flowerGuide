@@ -20,4 +20,7 @@ public record Plant(
         String locationRequirements,
         String fertilizingInstructions
 ) {
+    public Plant(PlantDto plantDto) {
+        this(null, plantDto.name(), plantDto.species(), plantDto.description(), plantDto.lastWatered(), plantDto.lastFertilized(), plantDto.nextWatering(), plantDto.nextFertilizing(), plantDto.careInstructions(), plantDto.soilRequirements(), plantDto.locationRequirements(), plantDto.fertilizingInstructions());
+    }
 }
