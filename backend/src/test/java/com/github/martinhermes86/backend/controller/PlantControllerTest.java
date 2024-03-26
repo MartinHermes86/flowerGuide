@@ -31,14 +31,9 @@ class PlantControllerTest {
     @Test
     void getAllPlants_whenEmpty() throws Exception {
         //Given
-        List<Plant> expected = List.of();
-        //When and Then
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/api/plants"))
+        mvc.perform(MockMvcRequestBuilders.get("/api/plants"))
                 .andExpect(status().isOk())
-                .andReturn();
-        List<Plant> actual = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>() {});
-
-        assertEquals(expected, actual);
+                .andExpect(content().json("[]"));
     }
 
 }
