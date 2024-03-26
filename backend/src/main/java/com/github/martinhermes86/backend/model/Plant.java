@@ -1,11 +1,9 @@
 package com.github.martinhermes86.backend.model;
 
-import lombok.With;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 
-@With
 public record Plant(
         @Id String id,
         String name,
