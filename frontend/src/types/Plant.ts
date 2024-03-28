@@ -10,5 +10,5 @@ export type Plant = {
     careInstructions: string,
     soilRequirements: string,
     locationRequirements: string,
-    fertilizingInstructions: string
+    fertilizingInstructions: string,
 }
