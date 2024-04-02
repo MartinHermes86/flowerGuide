@@ -14,6 +14,7 @@ import static org.mockito.Mockito.*;
 class PlantServiceTest {
 
     private final PlantRepo mockPlantRepo = mock(PlantRepo.class);
+    private final PlantService plantService = new PlantService(mockPlantRepo);
 
     @Test
     void testGetAllPlants() {
@@ -59,5 +60,43 @@ class PlantServiceTest {
         assertEquals(plantDto.soilRequirements(), plant.soilRequirements());
         assertEquals(plantDto.locationRequirements(), plant.locationRequirements());
         assertEquals(plantDto.fertilizingInstructions(), plant.fertilizingInstructions());
+    }
+
+    @Test
+    void addPlant() {
+        // Given
+        PlantDto plantDto = new PlantDto(
+                "Rose",
+                "Rosa",
+                "A beautiful flower",
+                LocalDate.of(2023, 6, 1),
+                LocalDate.of(2023, 5, 15),
+                LocalDate.of(2023, 6, 8),
+                LocalDate.of(2023, 6, 15),
+                "Water regularly",
+                "Well-drained soil",
+                "Full sun",
+                "Fertilize monthly"
+        );
+        Plant expected = new Plant(
+                "1",
+                "Rose",
+                "Rosa",
+                "A beautiful flower",
+                LocalDate.of(2023, 6, 1),
+                LocalDate.of(2023, 5, 15),
+                LocalDate.of(2023, 6, 8),
+                LocalDate.of(2023, 6, 15),
+                "Water regularly",
+                "Well-drained soil",
+                "Full sun",
+                "Fertilize monthly");
+
+        // When
+        when(mockPlantRepo.save(any(Plant.class))).thenReturn(expected);
+        Plant actual = plantService.addPlant(plantDto);
+        //Then
+        verify(mockPlantRepo).save(any(Plant.class));
+        assertEquals(expected, actual);
     }
 }

@@ -1,6 +1,7 @@
 package com.github.martinhermes86.backend.controller;
 
 import com.github.martinhermes86.backend.model.Plant;
+import com.github.martinhermes86.backend.model.PlantDto;
 import com.github.martinhermes86.backend.service.PlantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class PlantController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Plant addPlant(Plant plant) {
-        return plantService.addPlant(plant);
+    public Plant addPlant(@RequestBody PlantDto plantDto) {
+        return plantService.addPlant(plantDto);
     }
 }
