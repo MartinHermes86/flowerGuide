@@ -1,5 +1,6 @@
 import {Plant} from "../types/Plant.ts";
 import React from "react";
+import './PlantCard.css';
 
 type PlantCardProps = {
     plant: Plant,
@@ -7,7 +8,6 @@ type PlantCardProps = {
 export default function PlantCard(props: Readonly<PlantCardProps>) :React.ReactElement{
     return (
         <div className="plantCard">
-            <h3>{props.plant.id}</h3>
             <h3>{props.plant.name}</h3>
             <p>{props.plant.species}</p>
             <p>{props.plant.description}</p>
