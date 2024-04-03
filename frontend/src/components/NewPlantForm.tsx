@@ -2,6 +2,7 @@ import {PlantDto} from "../types/PlantDto.ts";
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { Button, Alert } from "@mui/material";
+import './NewPlantForm.css';
 
 type NewPlantFormProps = {
     savePlant: (e: React.FormEvent, formData: PlantDto) => void;
