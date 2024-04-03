@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {Plant} from "../types/Plant.ts";
 import axios from 'axios';
+import {PlantDto} from "../types/PlantDto.ts";
 
 
 
@@ -22,11 +23,16 @@ export default function usePlants() {
             .catch((error) => console.error(error));
     }
 
-    useEffect(() => {
-        fetchPlants();
-    }, []);
+    function savePlant(plant: PlantDto) {
+        axios.post('api/plants', plant)
+            .then(() => fetchPlants())
+            .catch((error) => console.error(error));
+    }
+
+    useEffect(() => fetchPlants(), []);
 
     return {
         plants,
+        savePlant,
     }
 }
