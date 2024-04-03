@@ -24,8 +24,75 @@ class PlantServiceTest {
         when(mockPlantRepo.findAll()).thenReturn(expected);
         List<Plant> actual = new PlantService(mockPlantRepo).getAllPlants();
         //Then
-        assertEquals(expected, actual);
         verify(mockPlantRepo).findAll();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetAllPlants_WithPlantsInDb() {
+        List<Plant> expected = List.of(
+                new Plant(
+                        "1",
+                        "Rose",
+                        "Rosa",
+                        "A beautiful flower",
+                        LocalDate.of(2023, 6, 1),
+                        LocalDate.of(2023, 5, 15),
+                        LocalDate.of(2023, 6, 8),
+                        LocalDate.of(2023, 6, 15),
+                        "Water regularly",
+                        "Well-drained soil",
+                        "Full sun",
+                        "Fertilize monthly"
+                ),
+                new Plant(
+                        "2",
+                        "Tulip",
+                        "Tulipa",
+                        "A beautiful flower",
+                        LocalDate.of(2023, 6, 1),
+                        LocalDate.of(2023, 5, 15),
+                        LocalDate.of(2023, 6, 8),
+                        LocalDate.of(2023, 6, 15),
+                        "Water regularly",
+                        "Well-drained soil",
+                        "Full sun",
+                        "Fertilize monthly"
+                )
+        );
+
+        when(mockPlantRepo.findAll()).thenReturn(expected);
+        List<Plant> actual = plantService.getAllPlants();
+        verify(mockPlantRepo).findAll();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetPlantById_whenPlantFound() {
+        // Given
+        String id = "1";
+        Plant expected = new Plant(
+                "1",
+                "Rose",
+                "Rosa",
+                "A beautiful flower",
+                LocalDate.of(2023, 6, 1),
+                LocalDate.of(2023, 5, 15),
+                LocalDate.of(2023, 6, 8),
+                LocalDate.of(2023, 6, 15),
+                "Water regularly",
+                "Well-drained soil",
+                "Full sun",
+                "Fertilize monthly"
+        );
+
+        // When
+        when(mockPlantRepo.findById(id)).thenReturn(java.util.Optional.of(expected));
+        Plant actual = plantService.getPlantById(id);
+
+        // Then
+        verify(mockPlantRepo).findById(id);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -63,7 +130,7 @@ class PlantServiceTest {
     }
 
     @Test
-    void addPlant() {
+    void testAddPlant() {
         // Given
         PlantDto plantDto = new PlantDto(
                 "Rose",
