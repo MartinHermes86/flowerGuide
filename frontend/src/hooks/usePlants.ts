@@ -29,9 +29,7 @@ export default function usePlants() {
             .catch((error) => console.error(error));
     }
 
-    useEffect(() => {
-        fetchPlants();
-    }, []);
+    useEffect(() => fetchPlants(), []);
 
     return {
         plants,
