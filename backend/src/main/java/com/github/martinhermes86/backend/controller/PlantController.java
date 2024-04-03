@@ -21,6 +21,11 @@ public class PlantController {
         return plantService.getAllPlants();
     }
 
+    @GetMapping("/{id}")
+    public Plant getPlantById(@PathVariable String id) {
+        return plantService.getPlantById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Plant addPlant(@RequestBody PlantDto plantDto) {

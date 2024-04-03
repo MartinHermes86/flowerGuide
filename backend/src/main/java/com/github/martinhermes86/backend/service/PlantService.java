@@ -1,5 +1,6 @@
 package com.github.martinhermes86.backend.service;
 
+import com.github.martinhermes86.backend.exception.PlantNotFoundException;
 import com.github.martinhermes86.backend.model.Plant;
 import com.github.martinhermes86.backend.model.PlantDto;
 import com.github.martinhermes86.backend.repository.PlantRepo;
@@ -15,6 +16,12 @@ public class PlantService {
 
     public List<Plant> getAllPlants() {
         return plantRepo.findAll();
+    }
+
+    public Plant getPlantById(String id) {
+        return plantRepo
+                .findById(id)
+                .orElseThrow(() -> new PlantNotFoundException("Plant with id " + id + " not found"));
     }
 
     public Plant addPlant(PlantDto plantDto) {
