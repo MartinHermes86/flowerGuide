@@ -1,13 +1,19 @@
 import {PlantDto} from "../types/PlantDto.ts";
-import React from "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import { Button, Alert } from "@mui/material";
 
 type NewPlantFormProps = {
     savePlant: (e: React.FormEvent, formData: PlantDto) => void;
 }
 export default function NewPlantForm(props: Readonly<NewPlantFormProps>) {
-
+    const [openAlert, setOpenAlert] = useState(false);
     const navigate = useNavigate();
+
+    const handleAlertClose = () => {
+        setOpenAlert(false);
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const target = e.target as typeof e.target & {
@@ -37,56 +43,70 @@ export default function NewPlantForm(props: Readonly<NewPlantFormProps>) {
             fertilizingInstructions: target.fertilizingInstructions.value,
         };
         props.savePlant(e, formData);
-        alert("Pflanze erfolgreich hinzugefügt");
-        navigate("/");
+        setOpenAlert(true);
     };
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Name:
-                <input type="text" name="name" required/>
-            </label>
-            <label>
-                Species:
-                <input type="text" name="species" required/>
-            </label>
-            <label>
-                Description:
-                <input type="text" name="description" required/>
-            </label>
-            <label>
-                Last Watered:
-                <input type="date" name="lastWatered" required/>
-            </label>
-            <label>
-                Last Fertilized:
-                <input type="date" name="lastFertilized" required/>
-            </label>
-            <label>
-                Next Watering:
-                <input type="date" name="nextWatering" required/>
-            </label>
-            <label>
-                Next Fertilizing:
-                <input type="date" name="nextFertilizing" required/>
-            </label>
-            <label>
-                Care Instructions:
-                <input type="text" name="careInstructions" required/>
-            </label>
-            <label>
-                Soil Requirements:
-                <input type="text" name="soilRequirements" required/>
-            </label>
-            <label>
-                Location Requirements:
-                <input type="text" name="locationRequirements" required/>
-            </label>
-            <label>
-                Fertilizing Instructions:
-                <input type="text" name="fertilizingInstructions" required/>
-            </label>
-            <button type="submit">Save Plant</button>
-        </form>
+        <>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Name:
+                    <input type="text" name="name" required/>
+                </label>
+                <label>
+                    Species:
+                    <input type="text" name="species" required/>
+                </label>
+                <label>
+                    Description:
+                    <input type="text" name="description" required/>
+                </label>
+                <label>
+                    Last Watered:
+                    <input type="date" name="lastWatered" required/>
+                </label>
+                <label>
+                    Last Fertilized:
+                    <input type="date" name="lastFertilized" required/>
+                </label>
+                <label>
+                    Next Watering:
+                    <input type="date" name="nextWatering" required/>
+                </label>
+                <label>
+                    Next Fertilizing:
+                    <input type="date" name="nextFertilizing" required/>
+                </label>
+                <label>
+                    Care Instructions:
+                    <input type="text" name="careInstructions" required/>
+                </label>
+                <label>
+                    Soil Requirements:
+                    <input type="text" name="soilRequirements" required/>
+                </label>
+                <label>
+                    Location Requirements:
+                    <input type="text" name="locationRequirements" required/>
+                </label>
+                <label>
+                    Fertilizing Instructions:
+                    <input type="text" name="fertilizingInstructions" required/>
+                </label>
+                <button type="submit">Save Plant</button>
+            </form>
+            {openAlert && (
+                <Alert
+                    onClose={handleAlertClose}
+                    severity="success"
+                    action={
+                        <Button color="inherit" size="small" onClick={() => navigate('/')}>
+                            Zurück zur Startseite
+                        </Button>
+                    }
+                >
+                    Pflanze erfolgreich hinzugefügt
+                </Alert>
+            )}
+        </>
     );
 }
