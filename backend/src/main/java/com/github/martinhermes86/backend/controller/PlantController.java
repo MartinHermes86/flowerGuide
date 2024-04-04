@@ -34,6 +34,11 @@ public class PlantController {
         return plantService.addPlant(plantDto);
     }
 
+    @DeleteMapping("/{id}")
+    public void deletePlant(@PathVariable String id) {
+        plantService.deletePlantById(id);
+    }
+
     @ExceptionHandler(PlantNotFoundException.class)
     public ResponseEntity<String> handlePlantNotFoundException(PlantNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());

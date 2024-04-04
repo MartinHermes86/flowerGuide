@@ -28,4 +28,11 @@ public class PlantService {
         Plant plant = new Plant(null, plantDto.name(), plantDto.species(), plantDto.description(), plantDto.lastWatered(), plantDto.lastFertilized(), plantDto.nextWatering(), plantDto.nextFertilizing(), plantDto.careInstructions(), plantDto.soilRequirements(), plantDto.locationRequirements(), plantDto.fertilizingInstructions());
         return plantRepo.save(plant);
     }
+
+    public void deletePlantById(String id) {
+        if (!plantRepo.existsById(id)) {
+            throw new PlantNotFoundException("Plant with id " + id + " not found");
+        }
+        plantRepo.deleteById(id);
+    }
 }

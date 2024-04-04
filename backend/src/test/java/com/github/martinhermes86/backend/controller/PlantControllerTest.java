@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -99,5 +100,45 @@ class PlantControllerTest {
                         .content(objectMapper.writeValueAsString(plantDto)))
                 .andExpect(status().isCreated())
                 .andExpect(content().json(objectMapper.writeValueAsString(plantDto)));
+    }
+
+    @Test
+    void deletePlantById_when_not_found() throws Exception {
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.delete("/api/plants/42343"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Plant with id 42343 not found"))
+                .andReturn();
+
+        assertEquals("Plant with id 42343 not found", result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void deletePlantById_when_found() throws Exception {
+        //Given
+        PlantDto plantDto = new PlantDto(
+                "Rose",
+                "Rosa",
+                "A beautiful flower",
+                null,
+                null,
+                null,
+                null,
+                "Water regularly",
+                "Well-drained soil",
+                "Full sun",
+                "Fertilize monthly"
+        );
+        String plantDtoJson = objectMapper.writeValueAsString(plantDto);
+
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/api/plants")
+                .contentType("application/json")
+                .content(plantDtoJson))
+                .andExpect(status().isCreated())
+                .andReturn();
+        // When & Then
+        Plant actual = objectMapper.readValue(result.getResponse().getContentAsString(), Plant.class);
+
+        mvc.perform(MockMvcRequestBuilders.delete("/api/plants/" + actual.id()))
+                .andExpect(status().isOk());
     }
 }
