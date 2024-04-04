@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -165,5 +166,47 @@ class PlantServiceTest {
         //Then
         verify(mockPlantRepo).save(any(Plant.class));
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testDeletePlantById_whenPlantFound() {
+        // Given
+        String id = "1";
+        Plant plant = new Plant(
+                "1",
+                "Rose",
+                "Rosa",
+                "A beautiful flower",
+                LocalDate.of(2023, 6, 1),
+                LocalDate.of(2023, 5, 15),
+                LocalDate.of(2023, 6, 8),
+                LocalDate.of(2023, 6, 15),
+                "Water regularly",
+                "Well-drained soil",
+                "Full sun",
+                "Fertilize monthly"
+        );
+        //When
+        when(mockPlantRepo.existsById(plant.id()))
+                .thenReturn(true);
+        plantService.deletePlantById(id);
+
+        // Then
+        verify(mockPlantRepo).existsById(id);
+        verify(mockPlantRepo).deleteById(id);
+    }
+
+    @Test
+    void testDeletePlantById_whenPlantNotFound() {
+        // Given
+        String id = "1";
+        // When
+        when(mockPlantRepo.existsById(id)).thenReturn(false);
+        // Then
+        try {
+            plantService.deletePlantById(id);
+        } catch (Exception e) {
+            assertEquals("Plant with id " + id + " not found", e.getMessage());
+        }
     }
 }
