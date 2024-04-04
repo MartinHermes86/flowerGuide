@@ -1,6 +1,7 @@
 package com.github.martinhermes86.backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.martinhermes86.backend.model.Plant;
 import com.github.martinhermes86.backend.model.PlantDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -28,9 +31,48 @@ class PlantControllerTest {
     @Test
     void getAllPlants_whenEmpty() throws Exception {
         //Given
-        mvc.perform(MockMvcRequestBuilders.get("/api/plants"))
+        mvc.perform(get("/api/plants"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[]"));
+    }
+
+    @Test
+    void getPlantById_whenEmpty() throws Exception {
+        //Given
+        mvc.perform(get("/api/plants/4234523"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Plant with id 4234523 not found"));
+    }
+
+    @Test
+    void getPlantById_and_return_it() throws Exception {
+        //Given
+        PlantDto plantDto = new PlantDto(
+                "Rose",
+                "Rosa",
+                "A beautiful flower",
+                null,
+                null,
+                null,
+                null,
+                "Water regularly",
+                "Well-drained soil",
+                "Full sun",
+                "Fertilize monthly"
+        );
+        String plantDtoJson = objectMapper.writeValueAsString(plantDto);
+
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/api/plants")
+                .contentType("application/json")
+                .content(plantDtoJson))
+                .andExpect(status().isCreated())
+                .andReturn();
+        // When & Then
+        Plant actual = objectMapper.readValue(result.getResponse().getContentAsString(), Plant.class);
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/plants/" + actual.id()))
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(plantDto)));
     }
 
     @Test
