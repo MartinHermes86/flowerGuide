@@ -187,12 +187,11 @@ class PlantServiceTest {
                 "Fertilize monthly"
         );
         //When
-        when(mockPlantRepo.existsById(plant.id()))
-                .thenReturn(true);
+        when(mockPlantRepo.findById(id)).thenReturn(Optional.of(plant));
         plantService.deletePlantById(id);
 
         // Then
-        verify(mockPlantRepo).existsById(id);
+        verify(mockPlantRepo).findById(id);
         verify(mockPlantRepo).deleteById(id);
     }
 

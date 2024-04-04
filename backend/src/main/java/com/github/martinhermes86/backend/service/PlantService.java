@@ -30,9 +30,7 @@ public class PlantService {
     }
 
     public void deletePlantById(String id) {
-        if (!plantRepo.existsById(id)) {
-            throw new PlantNotFoundException("Plant with id " + id + " not found");
-        }
+        getPlantById(id);
         plantRepo.deleteById(id);
     }
 }
