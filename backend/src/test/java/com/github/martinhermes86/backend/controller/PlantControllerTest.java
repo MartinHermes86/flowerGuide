@@ -141,4 +141,77 @@ class PlantControllerTest {
         mvc.perform(MockMvcRequestBuilders.delete("/api/plants/" + actual.id()))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void updatePlant_when_not_found() throws Exception {
+        //Given
+        PlantDto plantDto = new PlantDto(
+                "Rose",
+                "Rosa",
+                "A beautiful flower",
+                null,
+                null,
+                null,
+                null,
+                "Water regularly",
+                "Well-drained soil",
+                "Full sun",
+                "Fertilize monthly"
+        );
+        String plantDtoJson = objectMapper.writeValueAsString(plantDto);
+
+        mvc.perform(MockMvcRequestBuilders.put("/api/plants/42343")
+                .contentType("application/json")
+                .content(plantDtoJson))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Plant with id 42343 not found"));
+    }
+
+    @Test
+    void updatePlant_when_found() throws Exception {
+        //Given
+        PlantDto plantDto = new PlantDto(
+                "Rose",
+                "Rosa",
+                "A beautiful flower",
+                null,
+                null,
+                null,
+                null,
+                "Water regularly",
+                "Well-drained soil",
+                "Full sun",
+                "Fertilize monthly"
+        );
+        String plantDtoJson = objectMapper.writeValueAsString(plantDto);
+
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/api/plants")
+                .contentType("application/json")
+                .content(plantDtoJson))
+                .andExpect(status().isCreated())
+                .andReturn();
+        // When & Then
+        Plant actual = objectMapper.readValue(result.getResponse().getContentAsString(), Plant.class);
+
+        PlantDto updatedPlantDto = new PlantDto(
+                "Updated Rose",
+                "White",
+                "A beautiful flower",
+                null,
+                null,
+                null,
+                null,
+                "Water regularly, less in Winter",
+                "Well-drained soil",
+                "Full sun",
+                "Fertilize monthly"
+        );
+        String updatedPlantDtoJson = objectMapper.writeValueAsString(updatedPlantDto);
+
+        mvc.perform(MockMvcRequestBuilders.put("/api/plants/" + actual.id())
+                .contentType("application/json")
+                .content(updatedPlantDtoJson))
+                .andExpect(status().isOk())
+                .andExpect(content().json(updatedPlantDtoJson));
+    }
 }
