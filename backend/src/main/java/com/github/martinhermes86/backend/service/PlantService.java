@@ -33,4 +33,25 @@ public class PlantService {
         getPlantById(id);
         plantRepo.deleteById(id);
     }
+
+    public Plant updatePlant(String id, PlantDto plantDto) {
+        Plant existingPlant = getPlantById(id);
+
+        Plant updatedPlant = new Plant(
+                existingPlant.id(),
+                plantDto.name(),
+                plantDto.species(),
+                plantDto.description(),
+                plantDto.lastWatered(),
+                plantDto.lastFertilized(),
+                plantDto.nextWatering(),
+                plantDto.nextFertilizing(),
+                plantDto.careInstructions(),
+                plantDto.soilRequirements(),
+                plantDto.locationRequirements(),
+                plantDto.fertilizingInstructions()
+        );
+
+        return plantRepo.save(updatedPlant);
+    }
 }
