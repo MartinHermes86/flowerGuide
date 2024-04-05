@@ -34,6 +34,11 @@ public class PlantController {
         return plantService.addPlant(plantDto);
     }
 
+    @PutMapping("/{id}")
+    public Plant updatePlant(@PathVariable String id, @RequestBody PlantDto plantDto) {
+        return plantService.updatePlant(id, plantDto);
+    }
+
     @DeleteMapping("/{id}")
     public void deletePlant(@PathVariable String id) {
         plantService.deletePlantById(id);

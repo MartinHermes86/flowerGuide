@@ -1,5 +1,6 @@
 package com.github.martinhermes86.backend.service;
 
+import com.github.martinhermes86.backend.exception.PlantNotFoundException;
 import com.github.martinhermes86.backend.model.Plant;
 import com.github.martinhermes86.backend.model.PlantDto;
 import com.github.martinhermes86.backend.repository.PlantRepo;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class PlantServiceTest {
@@ -187,12 +189,11 @@ class PlantServiceTest {
                 "Fertilize monthly"
         );
         //When
-        when(mockPlantRepo.existsById(plant.id()))
-                .thenReturn(true);
+        when(mockPlantRepo.findById(id)).thenReturn(Optional.of(plant));
         plantService.deletePlantById(id);
 
         // Then
-        verify(mockPlantRepo).existsById(id);
+        verify(mockPlantRepo).findById(id);
         verify(mockPlantRepo).deleteById(id);
     }
 
@@ -208,5 +209,83 @@ class PlantServiceTest {
         } catch (Exception e) {
             assertEquals("Plant with id " + id + " not found", e.getMessage());
         }
+    }
+
+    @Test
+    void testUpdatePlant_whenPlantFound() {
+        // Given
+        String id = "1";
+        PlantDto plantDto = new PlantDto(
+                "Rose Updated",
+                "Rosa",
+                "A beautiful flower",
+                LocalDate.of(2023, 6, 1),
+                LocalDate.of(2023, 5, 15),
+                LocalDate.of(2023, 6, 8),
+                LocalDate.of(2023, 6, 15),
+                "Water regularly, but less in winter",
+                "Well-drained soil",
+                "Full sun",
+                "Fertilize monthly"
+        );
+        Plant existingPlant = new Plant(
+                "1",
+                "Rose",
+                "Rosa",
+                "A beautiful flower",
+                LocalDate.of(2023, 6, 1),
+                LocalDate.of(2023, 5, 15),
+                LocalDate.of(2023, 6, 8),
+                LocalDate.of(2023, 6, 15),
+                "Water regularly",
+                "Well-drained soil",
+                "Full sun",
+                "Fertilize monthly"
+        );
+        Plant updatedPlant = new Plant(
+                id,
+                plantDto.name(),
+                plantDto.species(),
+                plantDto.description(),
+                plantDto.lastWatered(),
+                plantDto.lastFertilized(),
+                plantDto.nextWatering(),
+                plantDto.nextFertilizing(),
+                plantDto.careInstructions(),
+                plantDto.soilRequirements(),
+                plantDto.locationRequirements(),
+                plantDto.fertilizingInstructions()
+        );
+        // When
+        when(mockPlantRepo.findById(id)).thenReturn(Optional.of(existingPlant));
+        when(mockPlantRepo.save(updatedPlant)).thenReturn(updatedPlant);
+        Plant actual = plantService.updatePlant(id, plantDto);
+        // Then
+        verify(mockPlantRepo).findById(id);
+        verify(mockPlantRepo).save(updatedPlant);
+        assertEquals(updatedPlant, actual);
+    }
+
+    @Test
+    void testUpdatePlant_whenPlantNotFound() {
+        // Given
+        String id = "1";
+        PlantDto plantDto = new PlantDto(
+                "Rose Updated",
+                "Rosa",
+                "A beautiful flower",
+                LocalDate.of(2023, 6, 1),
+                LocalDate.of(2023, 5, 15),
+                LocalDate.of(2023, 6, 8),
+                LocalDate.of(2023, 6, 15),
+                "Water regularly, but less in winter",
+                "Well-drained soil",
+                "Full sun",
+                "Fertilize monthly"
+        );
+        // When
+        when(mockPlantRepo.existsById(id)).thenReturn(false);
+        // Then
+        assertThrows(PlantNotFoundException.class, () -> plantService.updatePlant(id, plantDto));
     }
 }
