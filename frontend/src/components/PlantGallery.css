@@ -1,0 +1,7 @@
+.plantGallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Definiert den Abstand zwischen den Plant Cards */
+    justify-content: flex-start; /* Ausrichtung der Cards am Anfang des Containers */
+    padding: 20px; /* Optional: Fügt etwas Platz innerhalb des Containers hinzu */
+}

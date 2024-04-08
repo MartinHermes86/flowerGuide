@@ -29,10 +29,24 @@ export default function usePlants() {
             .catch((error) => console.error(error));
     }
 
+    function updatePlant(id: string, plant: PlantDto) {
+        axios.put(`api/plants/${id}`, plant)
+            .then(() => fetchPlants())
+            .catch((error) => console.error(error));
+    }
+
+    function deletePlant(id: string) {
+        axios.delete(`api/plants/${id}`)
+            .then(() => fetchPlants())
+            .catch((error) => console.error(error));
+    }
+
     useEffect(() => fetchPlants(), []);
 
     return {
         plants,
         savePlant,
+        updatePlant,
+        deletePlant
     }
 }

@@ -1,13 +1,18 @@
 import {Plant} from "../types/Plant.ts";
 import React from "react";
 import './PlantCard.css';
+import usePlantLottie from "../hooks/useLottie.ts";
 
 type PlantCardProps = {
     plant: Plant,
 }
 export default function PlantCard(props: Readonly<PlantCardProps>) :React.ReactElement{
+    const { View } = usePlantLottie();
+
     return (
+
         <div className="plantCard">
+            {View}
             <h3>{props.plant.name}</h3>
             <p>{props.plant.species}</p>
             <p>{props.plant.description}</p>
@@ -20,5 +25,6 @@ export default function PlantCard(props: Readonly<PlantCardProps>) :React.ReactE
             <p>Location Requirements: {props.plant.locationRequirements}</p>
             <p>Fertilizing Instructions: {props.plant.fertilizingInstructions}</p>
         </div>
+
     )
 }
