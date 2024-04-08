@@ -12,7 +12,9 @@ export default function PlantCard(props: Readonly<PlantCardProps>) :React.ReactE
     return (
 
         <div className="plantCard">
-            {View}
+            <div className="lottieContainer">
+                {View}
+            </div>
             <h3>{props.plant.name}</h3>
             <p>{props.plant.species}</p>
             <p>{props.plant.description}</p>

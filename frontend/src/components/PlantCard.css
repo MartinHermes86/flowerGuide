@@ -1,36 +1,30 @@
-/* Container für die Plant Cards */
-.plantsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Definiert den Abstand zwischen den Plant Cards */
-    justify-content: flex-start; /* Ausrichtung der Cards am Anfang des Containers */
-    padding: 20px; /* Optional: Fügt etwas Platz innerhalb des Containers hinzu */
-}
-
-/* Einzelne Plant Card */
 .plantCard {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
     padding: 20px;
-    margin: 0; /* Entfernt den Margin, da wir 'gap' im Container verwenden */
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
-    width: calc(100% / 3 - 40px); /* Breite jeder Card, passt 3 Cards pro Zeile mit 20px gap */
-    box-sizing: border-box; /* Stellt sicher, dass Padding und Border in die Breite der Box inkludiert sind */
+    max-width: 300px;
 }
 
-/* Stil für Überschriften innerhalb der Card */
 .plantCard h3 {
     margin: 0;
     color: #333;
     font-size: 18px;
 }
 
-/* Stil für Paragraphen (Text) innerhalb der Card */
 .plantCard p {
     margin: 5px 0;
     color: #666;
-    font-size: 14px;
+    font-size: 16px;
+}
+
+.lottieContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 220px;
 }

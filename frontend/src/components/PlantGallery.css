@@ -1,7 +1,33 @@
 .plantGallery {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Definiert den Abstand zwischen den Plant Cards */
-    justify-content: flex-start; /* Ausrichtung der Cards am Anfang des Containers */
-    padding: 20px; /* Optional: Fügt etwas Platz innerhalb des Containers hinzu */
+    gap: 20px;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+.plantCard {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+}
+
+
+@media (min-width: 768px) {
+    .plantCard {
+        min-width: calc(50% - 20px);
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .plantCard {
+        min-width: calc(33.333% - 20px);
+    }
+}
+
+@media (min-width: 1200px) {
+    .plantCard {
+        min-width: calc(20% - 25px);
+    }
 }
