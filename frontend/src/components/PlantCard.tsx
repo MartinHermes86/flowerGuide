@@ -1,6 +1,6 @@
 import { Plant } from "../types/Plant.ts";
 import React from "react";
-import { Link } from "react-router-dom"; // Importiere Link für die Navigation
+import { Link } from "react-router-dom";
 import './PlantCard.css';
 import usePlantLottie from "../hooks/useLottie.ts";
 
@@ -14,7 +14,7 @@ export default function PlantCard(props: Readonly<PlantCardProps>) : React.React
     };
 
     return (
-        // Verwende Link-Komponente von react-router-dom für die Weiterleitung
+
         <Link to={`/plants/${props.plant.id}`} className="plantCard" style={cardStyle}>
             <div className="lottieContainer">
                 {View}

@@ -16,7 +16,6 @@ export default function NavBar(){
                         <li className="nav-item">
                             <Link className="nav-link" to="/new">Pflanzen hinzufügen</Link>
                         </li>
-                        {/* Weitere Nav-Items hier */}
                     </ul>
                 </div>
             </div>

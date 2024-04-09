@@ -22,26 +22,6 @@ export default function usePlants() {
             .catch((error) => console.error(error));
     }
 
-    function getPlantById(id: string): Plant {
-        const plantWithId = plants.filter((plant) => plant.id === id);
-
-        if (plantWithId.length === 0) alert("Plant not found");
-        else return plantWithId[0];
-        return {
-            id: id,
-            name: "",
-            species: "",
-            description: "",
-            lastWatered: new Date(),
-            nextWatering: new Date(),
-            lastFertilized: new Date(),
-            nextFertilizing: new Date(),
-            careInstructions: "",
-            soilRequirements: "",
-            locationRequirements: "",
-            fertilizingInstructions: "",
-        }
-    }
 
         function savePlant(plant: PlantDto) {
             axios.post('api/plants', plant)
@@ -67,7 +47,6 @@ export default function usePlants() {
             plants,
             fetchPlants,
             savePlant,
-            getPlantById,
             updatePlant,
             deletePlant
         }
