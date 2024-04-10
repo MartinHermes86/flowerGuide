@@ -38,7 +38,6 @@ export default function usePlants() {
 
     return {
         plants,
-        fetchPlants,
         savePlant,
         updatePlant,
         deletePlant
