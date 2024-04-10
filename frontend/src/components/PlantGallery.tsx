@@ -1,6 +1,7 @@
 import {Plant} from "../types/Plant.ts";
 import PlantCard from "./PlantCard.tsx";
 import React from "react";
+import './PlantGallery.css'
 
 type PlantGalleryProps = {
     plants: Plant[],

@@ -1,13 +1,14 @@
-import {Route, Routes} from "react-router-dom";
-import PlantGallery from "./components/PlantGallery.tsx";
-import usePlants from "./hooks/usePlants.ts";
-import NewPlantForm from "./components/NewPlantForm.tsx";
-import {PlantDto} from "./types/PlantDto.ts";
-import React from "react";
-
+import React from 'react';
+import {Routes, Route} from 'react-router-dom';
+import PlantGallery from './components/PlantGallery';
+import NewPlantForm from './components/NewPlantForm';
+import PlantDetails from './components/PlantDetails';
+import NavBar from './components/NavBar';
+import usePlants from './hooks/usePlants';
+import {PlantDto} from './types/PlantDto';
 
 export default function App() {
-    const {plants, savePlant} = usePlants();
+    const {plants, savePlant, updatePlant, deletePlant} = usePlants();
 
     const handleSavePlant = (e: React.FormEvent, formData: PlantDto) => {
         e.preventDefault();
@@ -15,13 +16,14 @@ export default function App() {
     };
 
     return (
-
-        <Routes>
-            <Route path={"/"} element={<PlantGallery plants={plants}/>}/>
-            <Route path={"/new"} element={<NewPlantForm savePlant={handleSavePlant}/>}/>
-        </Routes>
-
-    )
+        <>
+            <NavBar/>
+            <Routes>
+                <Route path="/" element={<PlantGallery plants={plants}/>}/>
+                <Route path="/new" element={<NewPlantForm savePlant={handleSavePlant}/>}/>
+                <Route path="/plants/:id"
+                       element={<PlantDetails updatePlant={updatePlant} deletePlant={deletePlant}/>}/>
+            </Routes>
+        </>
+    );
 }
-
-
