@@ -3,19 +3,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import './PlantCard.css';
 import usePlantLottie from "../hooks/useLottie.ts";
+import getWateringStatusColor from "./WateringStatus.tsx";
 
 type PlantCardProps = {
     plant: Plant,
 }
 export default function PlantCard(props: Readonly<PlantCardProps>) : React.ReactElement{
     const { View } = usePlantLottie();
-    const cardStyle = {
-        textDecoration: 'none'
-    };
+    const statusClass = getWateringStatusColor(props.plant.nextWatering);
 
     return (
 
-        <Link to={`/plants/${props.plant.id}`} className="plantCard" style={cardStyle}>
+        <Link to={`/plants/${props.plant.id}`} className={`plantCard ${statusClass}`} style={{ textDecoration: 'none' }}>
             <div className="lottieContainer">
                 {View}
             </div>

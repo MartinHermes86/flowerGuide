@@ -11,6 +11,18 @@
     overflow: hidden;
 }
 
+.plantCard-overdue {
+    background-color: #ffdee7;
+}
+
+.plantCard-soon {
+    background-color: #fffacc;
+}
+
+.plantCard-normal {
+    background-color: #e0ffd1;
+}
+
 .plantCard h3 {
     margin: 0;
     color: #333;
