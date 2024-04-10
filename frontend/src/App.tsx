@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import PlantGallery from './components/PlantGallery';
 import NewPlantForm from './components/NewPlantForm';
@@ -8,11 +8,7 @@ import usePlants from './hooks/usePlants';
 import {PlantDto} from './types/PlantDto';
 
 export default function App() {
-    const {plants, savePlant, updatePlant, deletePlant, fetchPlants} = usePlants();
-
-    useEffect(() => {
-        fetchPlants();
-    }, [fetchPlants]);
+    const {plants, savePlant, updatePlant, deletePlant} = usePlants();
 
     const handleSavePlant = (e: React.FormEvent, formData: PlantDto) => {
         e.preventDefault();
