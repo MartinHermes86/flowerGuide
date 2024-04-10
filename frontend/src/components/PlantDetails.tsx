@@ -1,8 +1,9 @@
 import React, {useState, useEffect, FormEvent} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import {Button, Spinner} from "react-bootstrap";
+import {Button, Container, Spinner} from "react-bootstrap";
 import {Plant} from "../types/Plant.ts";
+import './PlantDetails.css';
 
 type PlantDetailProps = {
     deletePlant: (id: string) => void,
@@ -50,6 +51,22 @@ export default function PlantDetails(props: Readonly<PlantDetailProps>) {
             props.deletePlant(plant.id);
             navigate("/");
         }
+    };
+
+    const handleWaterPlant = () => {
+        if (!plant || !id) return;
+        const today = new Date();
+        const nextWatering = new Date();
+        nextWatering.setDate(today.getDate() + 7);
+
+        const updatedPlant = {
+            ...plant,
+            lastWatered: today,
+            nextWatering: nextWatering,
+            lastFertilized: new Date(plant.lastFertilized),
+            nextFertilizing: new Date(plant.nextFertilizing),
+        };
+        props.updatePlant(id, updatedPlant);
     };
 
     return (
@@ -118,19 +135,26 @@ export default function PlantDetails(props: Readonly<PlantDetailProps>) {
                 </form>
             ) : (
                 <>
-                    <h2>Pflanzendetails: {plant.name}</h2>
-                    <p>{plant.species}</p>
-                    <p>{plant.description}</p>
-                    <p>Last Watered: {String(plant.lastWatered)}</p>
-                    <p>Next Watering: {String(plant.nextWatering)}</p>
-                    <p>Last Fertilized: {String(plant.lastFertilized)}</p>
-                    <p>Next Fertilizing: {String(plant.nextFertilizing)}</p>
-                    <p>Care Instructions: {plant.careInstructions}</p>
-                    <p>Soil Requirements: {plant.soilRequirements}</p>
-                    <p>Location Requirements: {plant.locationRequirements}</p>
-                    <p>Fertilizing Instructions: {plant.fertilizingInstructions}</p>
-                    <Button onClick={() => setIsUpdateMode(true)}>Update</Button>
-                    <Button variant="danger" onClick={handleDeletePlant}>Löschen</Button>
+                    <Container className="plant-details-container mt-4">
+                        <h2 className="detail-heading mb-4">Pflanzendetails: {plant.name}</h2>
+                        <div className="plant-details mb-3">
+                            <p>Art: {plant.species}</p>
+                            <p>Beschreibung: {plant.description}</p>
+                            <p>Zuletzt gegossen: {String(plant.lastWatered)}</p>
+                            <p>Nächstes Gießen: {String(plant.nextWatering)}</p>
+                            <p>Zuletzt gedüngt: {String(plant.lastFertilized)}</p>
+                            <p>Nächstes Düngen: {String(plant.nextFertilizing)}</p>
+                            <p>Pflegehinweise: {plant.careInstructions}</p>
+                            <p>Bodenanforderungen: {plant.soilRequirements}</p>
+                            <p>Standortanforderungen: {plant.locationRequirements}</p>
+                            <p>Düngehinweise: {plant.fertilizingInstructions}</p>
+                        </div>
+                        <div className="buttons-container d-flex justify-content-start gap-2">
+                            <Button variant="primary" onClick={() => setIsUpdateMode(true)}>Update</Button>
+                            <Button variant="danger" onClick={handleDeletePlant}>Löschen</Button>
+                            <Button variant="success" onClick={handleWaterPlant}>Gegossen</Button>
+                        </div>
+                    </Container>
                 </>
             )}
         </div>
