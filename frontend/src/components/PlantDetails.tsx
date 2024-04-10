@@ -56,58 +56,65 @@ export default function PlantDetails(props: Readonly<PlantDetailProps>) {
         <div>
             {isUpdateMode ? (
                 <form onSubmit={handleUpdate}>
-                    <div>
-                        <label>Name:</label>
-                        <input type="text" name="name" value={plant.name || ''} onChange={handleChange} required/>
+                    <div className="form-group">
+                        <label htmlFor="name">Name:</label>
+                        <input type="text" className="form-control" id="name" name="name" value={plant.name || ''}
+                               onChange={handleChange} required/>
                     </div>
-                    <div>
-                        <label>Species:</label>
-                        <input type="text" name="species" value={plant.species || ''} onChange={handleChange}/>
+                    <div className="form-group">
+                        <label htmlFor="species">Species:</label>
+                        <input type="text" className="form-control" id="species" name="species"
+                               value={plant.species || ''} onChange={handleChange}/>
                     </div>
-                    <div>
-                        <label>Description:</label>
-                        <textarea name="description" value={plant.description || ''} onChange={handleChange}/>
+                    <div className="form-group">
+                        <label htmlFor="description">Description:</label>
+                        <textarea className="form-control" id="description" name="description"
+                                  value={plant.description || ''} onChange={handleChange}/>
                     </div>
-                    <div>
-                        <label>Last Watered:</label>
-                        <input type="date" name="lastWatered" value={String(plant.lastWatered) || ''}
-                               onChange={handleChange}/>
+                    <div className="form-group">
+                        <label htmlFor="lastWatered">Last Watered:</label>
+                        <input type="date" className="form-control" id="lastWatered" name="lastWatered"
+                               value={String(plant.lastWatered) || ''} onChange={handleChange}/>
                     </div>
-                    <div>
-                        <label>Next Watering:</label>
-                        <input type="date" name="nextWatering" value={String(plant.nextWatering) || ''}
-                               onChange={handleChange}/>
+                    <div className="form-group">
+                        <label htmlFor="nextWatering">Next Watering:</label>
+                        <input type="date" className="form-control" id="nextWatering" name="nextWatering"
+                               value={String(plant.nextWatering) || ''} onChange={handleChange}/>
                     </div>
-                    <div>
-                        <label>Last Fertilized:</label>
-                        <input type="date" name="lastFertilized" value={String(plant.lastFertilized) || ''}
-                               onChange={handleChange}/>
+                    <div className="form-group">
+                        <label htmlFor="lastFertilized">Last Fertilized:</label>
+                        <input type="date" className="form-control" id="lastFertilized" name="lastFertilized"
+                               value={String(plant.lastFertilized) || ''} onChange={handleChange}/>
                     </div>
-                    <div>
-                        <label>Next Fertilizing:</label>
-                        <input type="date" name="nextFertilizing" value={String(plant.nextFertilizing) || ''}
-                               onChange={handleChange}/>
+                    <div className="form-group">
+                        <label htmlFor="nextFertilizing">Next Fertilizing:</label>
+                        <input type="date" className="form-control" id="nextFertilizing" name="nextFertilizing"
+                               value={String(plant.nextFertilizing) || ''} onChange={handleChange}/>
                     </div>
-                    <div>
-                        <label>Care Instructions:</label>
-                        <textarea name="careInstructions" value={plant.careInstructions || ''} onChange={handleChange}/>
+                    <div className="form-group">
+                        <label htmlFor="careInstructions">Care Instructions:</label>
+                        <textarea className="form-control" id="careInstructions" name="careInstructions"
+                                  value={plant.careInstructions || ''} onChange={handleChange}/>
                     </div>
-                    <div>
-                        <label>Soil Requirements:</label>
-                        <textarea name="soilRequirements" value={plant.soilRequirements || ''} onChange={handleChange}/>
+                    <div className="form-group">
+                        <label htmlFor="soilRequirements">Soil Requirements:</label>
+                        <textarea className="form-control" id="soilRequirements" name="soilRequirements"
+                                  value={plant.soilRequirements || ''} onChange={handleChange}/>
                     </div>
-                    <div>
-                        <label>Location Requirements:</label>
-                        <textarea name="locationRequirements" value={plant.locationRequirements || ''}
-                                  onChange={handleChange}/>
+                    <div className="form-group">
+                        <label htmlFor="locationRequirements">Location Requirements:</label>
+                        <textarea className="form-control" id="locationRequirements" name="locationRequirements"
+                                  value={plant.locationRequirements || ''} onChange={handleChange}/>
                     </div>
-                    <div>
-                        <label>Fertilizing Instructions:</label>
-                        <textarea name="fertilizingInstructions" value={plant.fertilizingInstructions || ''}
-                                  onChange={handleChange}/>
+                    <div className="form-group">
+                        <label htmlFor="fertilizingInstructions">Fertilizing Instructions:</label>
+                        <textarea className="form-control" id="fertilizingInstructions" name="fertilizingInstructions"
+                                  value={plant.fertilizingInstructions || ''} onChange={handleChange}/>
                     </div>
-                    <button type="submit">Speichern</button>
-                    <button type="button" onClick={() => setIsUpdateMode(false)}>Abbrechen</button>
+                    <button type="submit" className="btn btn-primary">Speichern</button>
+                    <button type="button" className="btn btn-secondary"
+                            onClick={() => setIsUpdateMode(false)}>Abbrechen
+                    </button>
                 </form>
             ) : (
                 <>

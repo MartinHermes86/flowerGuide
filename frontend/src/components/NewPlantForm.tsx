@@ -48,53 +48,56 @@ export default function NewPlantForm(props: Readonly<NewPlantFormProps>) {
     };
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Name:
-                    <input type="text" name="name" required/>
-                </label>
-                <label>
-                    Species:
-                    <input type="text" name="species" required/>
-                </label>
-                <label>
-                    Description:
-                    <input type="text" name="description" required/>
-                </label>
-                <label>
-                    Last Watered:
-                    <input type="date" name="lastWatered" required/>
-                </label>
-                <label>
-                    Last Fertilized:
-                    <input type="date" name="lastFertilized" required/>
-                </label>
-                <label>
-                    Next Watering:
-                    <input type="date" name="nextWatering" required/>
-                </label>
-                <label>
-                    Next Fertilizing:
-                    <input type="date" name="nextFertilizing" required/>
-                </label>
-                <label>
-                    Care Instructions:
-                    <input type="text" name="careInstructions" required/>
-                </label>
-                <label>
-                    Soil Requirements:
-                    <input type="text" name="soilRequirements" required/>
-                </label>
-                <label>
-                    Location Requirements:
-                    <input type="text" name="locationRequirements" required/>
-                </label>
-                <label>
-                    Fertilizing Instructions:
-                    <input type="text" name="fertilizingInstructions" required/>
-                </label>
-                <button type="submit">Save Plant</button>
+            <form onSubmit={handleSubmit} className="needs-validation" noValidate>
+                <div className="form-group">
+                    <label htmlFor="name">Name:</label>
+                    <input type="text" className="form-control" id="name" name="name" required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="species">Species:</label>
+                    <input type="text" className="form-control" id="species" name="species" required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Description:</label>
+                    <input type="text" className="form-control" id="description" name="description" required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="lastWatered">Last Watered:</label>
+                    <input type="date" className="form-control" id="lastWatered" name="lastWatered" required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="lastFertilized">Last Fertilized:</label>
+                    <input type="date" className="form-control" id="lastFertilized" name="lastFertilized" required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="nextWatering">Next Watering:</label>
+                    <input type="date" className="form-control" id="nextWatering" name="nextWatering" required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="nextFertilizing">Next Fertilizing:</label>
+                    <input type="date" className="form-control" id="nextFertilizing" name="nextFertilizing" required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="careInstructions">Care Instructions:</label>
+                    <input type="text" className="form-control" id="careInstructions" name="careInstructions" required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="soilRequirements">Soil Requirements:</label>
+                    <input type="text" className="form-control" id="soilRequirements" name="soilRequirements" required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="locationRequirements">Location Requirements:</label>
+                    <input type="text" className="form-control" id="locationRequirements" name="locationRequirements"
+                           required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="fertilizingInstructions">Fertilizing Instructions:</label>
+                    <input type="text" className="form-control" id="fertilizingInstructions"
+                           name="fertilizingInstructions" required/>
+                </div>
+                <button type="submit" className="btn btn-primary">Save Plant</button>
             </form>
+
             {openAlert && (
                 <Alert
                     onClose={handleAlertClose}
