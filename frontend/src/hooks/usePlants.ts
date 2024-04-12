@@ -23,9 +23,16 @@ export default function usePlants() {
     }
 
     function updatePlant(id: string, plant: PlantDto) {
-        axios.put(`/api/plants/${id}`, plant)
-            .then(() => fetchPlants())
-            .catch((error) => console.error(error));
+        return axios.put(`/api/plants/${id}`, plant)
+            .then((response) => {
+                const updatedPlant = response.data;
+                setPlants((prevPlants) => prevPlants.map((p) => p.id === updatedPlant.id ? updatedPlant : p));
+                return response;
+            })
+            .catch((error) => {
+                console.error(error)
+                throw error;
+            });
     }
 
     function deletePlant(id: string) {

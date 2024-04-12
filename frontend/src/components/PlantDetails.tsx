@@ -1,19 +1,21 @@
 import React, {useState, useEffect, FormEvent} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import {Button, Container, Spinner} from "react-bootstrap";
 import {Plant} from "../types/Plant.ts";
 import './PlantDetails.css';
+import {Dialog, DialogActions, DialogTitle} from "@mui/material";
 
 type PlantDetailProps = {
     deletePlant: (id: string) => void,
-    updatePlant: (id: string, plant: Plant) => void,
+    updatePlant: (id: string, plant: Plant) => Promise<AxiosResponse>,
 }
 
 export default function PlantDetails(props: Readonly<PlantDetailProps>) {
     const {id} = useParams<{ id: string }>();
     const [plant, setPlant] = useState<Plant | null>(null);
     const [isUpdateMode, setIsUpdateMode] = useState<boolean>(false);
+    const [openWateredAlert, setOpenWateredAlert] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,6 +28,14 @@ export default function PlantDetails(props: Readonly<PlantDetailProps>) {
         }
     }, [id]);
 
+    const handleWateredAlertClose = (action: string) => {
+        setOpenWateredAlert(false);
+        if (action === 'home') {
+            navigate('/');
+        } else if (action === 'details') {
+            navigate(`/plants/${id}`);
+        }
+    };
 
     const handleUpdate = async (e: FormEvent) => {
         e.preventDefault();
@@ -66,8 +76,13 @@ export default function PlantDetails(props: Readonly<PlantDetailProps>) {
             lastFertilized: new Date(plant.lastFertilized),
             nextFertilizing: new Date(plant.nextFertilizing),
         };
-        props.updatePlant(id, updatedPlant);
+        props.updatePlant(id, updatedPlant)
+            .then((response) => {
+                setPlant(response.data);
+            })
+        setOpenWateredAlert(true);
     };
+
 
     return (
         <div>
@@ -152,8 +167,23 @@ export default function PlantDetails(props: Readonly<PlantDetailProps>) {
                         <div className="buttons-container d-flex justify-content-start gap-2">
                             <Button variant="primary" onClick={() => setIsUpdateMode(true)}>Update</Button>
                             <Button variant="danger" onClick={handleDeletePlant}>Löschen</Button>
-                            <Button variant="success" onClick={handleWaterPlant}>Gegossen</Button>
+                            <Button variant="success" onClick={handleWaterPlant}>Gießen?</Button>
                         </div>
+                        <Dialog
+                            open={openWateredAlert}
+                            onClose={() => handleWateredAlertClose('close')}
+                            aria-labelledby="alert-dialog-title"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                {"Pflanze wurde erfolgreich gegossen!"}
+                            </DialogTitle>
+                            <DialogActions>
+                                <Button onClick={() => handleWateredAlertClose('details')}>Zurück zur Pflanze</Button>
+                                <Button onClick={() => handleWateredAlertClose('home')} autoFocus>
+                                    Zurück zur Startseite
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
                     </Container>
                 </>
             )}
