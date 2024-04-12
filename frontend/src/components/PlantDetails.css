@@ -1,0 +1,17 @@
+.plant-details-container {
+    margin-top: 20px;
+}
+
+.detail-heading {
+    margin-bottom: 20px;
+}
+
+.plant-details {
+    margin-bottom: 10px;
+}
+
+.buttons-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
