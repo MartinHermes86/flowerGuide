@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Montserrat';
+    src:  url('Montserrat-Regular.ttf') format('ttf')
+}
+
+body {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1024px) and (min-height: 768px) and (max-height: 768px) {
+    .container {
+        padding: 20px;
+        margin: auto;
+        width: 80%;
+        background-color: #f0f0f0;
+    }
+}
