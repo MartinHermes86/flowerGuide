@@ -6,6 +6,7 @@ import PlantDetails from './components/PlantDetails';
 import NavBar from './components/NavBar';
 import usePlants from './hooks/usePlants';
 import {PlantDto} from './types/PlantDto';
+import './App.css';
 
 export default function App() {
     const {plants, savePlant, updatePlant, deletePlant} = usePlants();

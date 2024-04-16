@@ -50,48 +50,49 @@ export default function NewPlantForm(props: Readonly<NewPlantFormProps>) {
         <>
             <form onSubmit={handleSubmit} className="needs-validation" noValidate>
                 <div className="form-group">
-                    <label htmlFor="name">Name:</label>
+                    <label htmlFor="name"><i className="fa fa-leaf"></i>Name:</label>
                     <input type="text" className="form-control" id="name" name="name" required/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="species">Species:</label>
+                    <label htmlFor="species"><i className="fa fa-leaf"></i>Species:</label>
                     <input type="text" className="form-control" id="species" name="species" required/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="description">Description:</label>
+                    <label htmlFor="description"> <i className="fas fa-file-alt"></i>Description:</label>
                     <input type="text" className="form-control" id="description" name="description" required/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="lastWatered">Last Watered:</label>
+                    <label htmlFor="lastWatered"><i className="fas fa-tint"></i>Last Watered:</label>
                     <input type="date" className="form-control" id="lastWatered" name="lastWatered" required/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="lastFertilized">Last Fertilized:</label>
-                    <input type="date" className="form-control" id="lastFertilized" name="lastFertilized" required/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="nextWatering">Next Watering:</label>
+                    <label htmlFor="nextWatering"><i className="fas fa-tint"></i>Next Watering:</label>
                     <input type="date" className="form-control" id="nextWatering" name="nextWatering" required/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="nextFertilizing">Next Fertilizing:</label>
+                    <label htmlFor="lastFertilized"><i className="fas fa-seedling"></i>Last Fertilized:</label>
+                    <input type="date" className="form-control" id="lastFertilized" name="lastFertilized" required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="nextFertilizing"><i className="fas fa-seedling"></i>Next Fertilizing:</label>
                     <input type="date" className="form-control" id="nextFertilizing" name="nextFertilizing" required/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="careInstructions">Care Instructions:</label>
+                    <label htmlFor="careInstructions"><i className="fas fa-spa"></i>Care Instructions:</label>
                     <input type="text" className="form-control" id="careInstructions" name="careInstructions" required/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="soilRequirements">Soil Requirements:</label>
+                    <label htmlFor="soilRequirements"><i className="fas fa-globe"></i>Soil Requirements:</label>
                     <input type="text" className="form-control" id="soilRequirements" name="soilRequirements" required/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="locationRequirements">Location Requirements:</label>
+                    <label htmlFor="locationRequirements"><i className="fas fa-sun"></i>Location Requirements:</label>
                     <input type="text" className="form-control" id="locationRequirements" name="locationRequirements"
                            required/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="fertilizingInstructions">Fertilizing Instructions:</label>
+                    <label htmlFor="fertilizingInstructions"><i className="fas fa-seedling"></i>Fertilizing
+                        Instructions:</label>
                     <input type="text" className="form-control" id="fertilizingInstructions"
                            name="fertilizingInstructions" required/>
                 </div>
@@ -104,7 +105,7 @@ export default function NewPlantForm(props: Readonly<NewPlantFormProps>) {
                     severity="success"
                     action={
                         <Button color="inherit" size="small" onClick={() => navigate('/')}>
-                            Zurück zur Startseite
+                        Zurück zur Startseite
                         </Button>
                     }
                 >

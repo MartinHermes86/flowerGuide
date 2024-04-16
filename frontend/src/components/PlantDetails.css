@@ -10,6 +10,15 @@
     margin-bottom: 10px;
 }
 
+.fa-leaf, .fa-tint, .fa-seedling, .fa-spa, .fa-globe, .fa-sun, .fa-file-alt {
+    margin-right: 10px;
+    color: #4CAF50;
+}
+
+.fa-tint, .fa-seedling, .fa-spa, .fa-globe, .fa-sun, .fa-file-alt {
+    font-size: 18px;
+}
+
 .buttons-container {
     margin-top: 20px;
     display: flex;

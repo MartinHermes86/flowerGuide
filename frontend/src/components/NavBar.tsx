@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'; // Für die Navigation
-
+import { Link } from 'react-router-dom';
+import './NavBar.css';
 export default function NavBar(){
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">

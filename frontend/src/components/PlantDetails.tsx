@@ -89,57 +89,59 @@ export default function PlantDetails(props: Readonly<PlantDetailProps>) {
             {isUpdateMode ? (
                 <form onSubmit={handleUpdate}>
                     <div className="form-group">
-                        <label htmlFor="name">Name:</label>
+                        <label htmlFor="name"><i className="fa fa-leaf"></i>Name:</label>
                         <input type="text" className="form-control" id="name" name="name" value={plant.name || ''}
                                onChange={handleChange} required/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="species">Species:</label>
+                        <label htmlFor="species"><i className="fa fa-leaf"></i>Species:</label>
                         <input type="text" className="form-control" id="species" name="species"
                                value={plant.species || ''} onChange={handleChange}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="description">Description:</label>
+                        <label htmlFor="description"> <i className="fas fa-file-alt"></i> Description:</label>
                         <textarea className="form-control" id="description" name="description"
                                   value={plant.description || ''} onChange={handleChange}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="lastWatered">Last Watered:</label>
+                        <label htmlFor="lastWatered"><i className="fas fa-tint"></i>Last Watered:</label>
                         <input type="date" className="form-control" id="lastWatered" name="lastWatered"
                                value={String(plant.lastWatered) || ''} onChange={handleChange}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="nextWatering">Next Watering:</label>
+                        <label htmlFor="nextWatering"><i className="fas fa-tint"></i>Next Watering:</label>
                         <input type="date" className="form-control" id="nextWatering" name="nextWatering"
                                value={String(plant.nextWatering) || ''} onChange={handleChange}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="lastFertilized">Last Fertilized:</label>
+                        <label htmlFor="lastFertilized"><i className="fas fa-seedling"></i>Last Fertilized:</label>
                         <input type="date" className="form-control" id="lastFertilized" name="lastFertilized"
                                value={String(plant.lastFertilized) || ''} onChange={handleChange}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="nextFertilizing">Next Fertilizing:</label>
+                        <label htmlFor="nextFertilizing"><i className="fas fa-seedling"></i>Next Fertilizing:</label>
                         <input type="date" className="form-control" id="nextFertilizing" name="nextFertilizing"
                                value={String(plant.nextFertilizing) || ''} onChange={handleChange}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="careInstructions">Care Instructions:</label>
+                        <label htmlFor="careInstructions"><i className="fas fa-spa"></i>Care Instructions:</label>
                         <textarea className="form-control" id="careInstructions" name="careInstructions"
                                   value={plant.careInstructions || ''} onChange={handleChange}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="soilRequirements">Soil Requirements:</label>
+                        <label htmlFor="soilRequirements"><i className="fas fa-globe"></i>Soil Requirements:</label>
                         <textarea className="form-control" id="soilRequirements" name="soilRequirements"
                                   value={plant.soilRequirements || ''} onChange={handleChange}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="locationRequirements">Location Requirements:</label>
+                        <label htmlFor="locationRequirements"><i className="fas fa-sun"></i>Location
+                            Requirements:</label>
                         <textarea className="form-control" id="locationRequirements" name="locationRequirements"
                                   value={plant.locationRequirements || ''} onChange={handleChange}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="fertilizingInstructions">Fertilizing Instructions:</label>
+                        <label htmlFor="fertilizingInstructions"><i className="fas fa-seedling"></i>Fertilizing
+                            Instructions:</label>
                         <textarea className="form-control" id="fertilizingInstructions" name="fertilizingInstructions"
                                   value={plant.fertilizingInstructions || ''} onChange={handleChange}/>
                     </div>
